@@ -22,13 +22,7 @@ class SearchPage extends Component {
         }
     }
     componentDidMount () {
-        /* let qSearch = (search.search || search.s);
-        if (qSearch) {
-            
-        } */
         const query = parse(this.props.location.search, { ignoreQueryPrefix: true })
-
-        console.log(query.search);
         this.getProducts(query.search);
     }
 
@@ -46,7 +40,6 @@ class SearchPage extends Component {
         this.setState({ search, products : [], categories: []});
         this.reqGetProducts(search)
             .then( res => {
-                console.log(res);
                 let { products, categories } = res
                 this.setState({
                     products,
@@ -54,8 +47,7 @@ class SearchPage extends Component {
                 })
             })
     }
-    async reqGetProducts (search) { 
-        console.log(search);       
+    async reqGetProducts (search) {  
         const res = await fetch(`/api/items?search=${encodeURI(search)}`)
                             .then(res => res.json())
                             .catch(err => console.log(err))

@@ -23,7 +23,6 @@ class Search extends Component {
     }
 
     submitSearch() {
-        console.log(this.props);
         if (this.state.search) {
             this.props.history.push(`/items?search=${this.state.search}`);
         }

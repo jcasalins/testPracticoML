@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import _ from 'lodash';
 
 class Item extends Component {
     constructor (props) {
@@ -13,12 +12,11 @@ class Item extends Component {
     }
 
     onImgLoad({target:img}) {
-        console.log(img);
         this.setState({dimensions:{height:img.naturalHeight,
                                    width:img.naturalWidth}});
     }
     setDimensions (dimensions) {
-        const {width, height} = this.state.dimensions;
+        const {width, height} = dimensions;
         return {
             'max-width' : width,
             'max-height': height
