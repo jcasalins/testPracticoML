@@ -47,18 +47,16 @@ class ProductPage extends Component {
     }
 
     render() {
-        console.log('render');
-        console.log(this.state.product);
         return (
             <main>
                 <Search history={this.props.history}/>
                 <Breadcrumbs categories={this.state.product.categories} />
                 <div className="container product">
                     <div className="row product-content">
-                        <div className="image-product col-auto">
+                        <div className="image-product col-12 col-md-8">
                             <img src={this.state.product.image} alt={this.state.product.title} />
                         </div>
-                        <div className="info-product col-auto">
+                        <div className="info-product col-12 col-md-4">
                             <div className="content-info-product">
                                 <p className="label">
                                     <span className="tag">{this.state.product.condition}</span> - <span className="sales">234 Vendidos</span>
@@ -68,7 +66,7 @@ class ProductPage extends Component {
                                 <button type="button" className="btn btn-primary">Comprar</button>
                             </div>
                         </div>
-                        <div className="desc-product col-auto">
+                        <div className="desc-product col-12">
                             <h2>Descripción del producto</h2>
                             <p>{this.state.product.description}</p>
                         </div>
