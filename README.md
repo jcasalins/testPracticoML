@@ -9,7 +9,7 @@
 
 ```
 cd testPracticoML
-npm installl
+npm install
 npm run install-client
 npm run build
 npm run start
