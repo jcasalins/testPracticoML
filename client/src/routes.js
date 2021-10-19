@@ -1,6 +1,7 @@
 import Home from './shared/pages/home/home';
 import SearchPage from './shared/pages/search/search';
 import ProductPage from './shared/pages/product/product';
+import NotFoundPage from './shared/pages/notFound/notFound';
 
 
 const routes = [
@@ -21,6 +22,8 @@ const routes = [
         component: ProductPage,
         exact: true
         
+    }, {
+        component: NotFoundPage
     }
 ];
 

@@ -75,9 +75,13 @@ code {
   }
 }
 
-
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-  /* Retina-specific stuff here */
-
+h1 {
+  &.title-not-found{
+    text-align: center;
+  }
 }
+
+.page-not-found{
+  padding-top: toRem(30); 
+}
+

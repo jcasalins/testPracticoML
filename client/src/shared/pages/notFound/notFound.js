@@ -8,6 +8,11 @@ class NotFoundPage extends Component {
             <main>
                 <Search history={this.props.history}/>
                 <div className="container container-not-found">
+                    <div className="row">
+                        <div className="page-not-found">
+                            <h1 className="title-not-found">Página no encontrada.</h1>
+                        </div>
+                    </div>
                 </div>
             </main>
         )
