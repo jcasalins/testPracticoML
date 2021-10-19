@@ -25,7 +25,10 @@ class ProductPage extends Component {
         this.setState({ product: {}, loading: true });
         this.reqGetProduct(id)
             .then(res => {
-                res.description = this.description(res.description);
+                
+                if (!_.isEmpty(res)) {
+                    res.description = this.description(res.description)
+                }
                 this.setState({
                     product: res,
                     loading: false

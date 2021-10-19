@@ -1,6 +1,6 @@
 const searchCtrl = {}
 const axios = require('axios');
-
+const _ = require('lodash');
 
 const URL = process.env.API_URL;
 
@@ -26,26 +26,27 @@ searchCtrl.search = async (req, res, next) => {
 
     const query = (req.query.s || req.query.search);
     let result = {};
-
+    console.log(query);
     if (query) {
         const config = {
             method: 'get',
-            url: `${URL}${ENDPOINT}search?q=${query}&limit=4`,
+            url: `${URL}${ENDPOINT}search?q=${encodeURI(query)}&limit=4`,
             headers: {}
         };
 
 
         result.products = await axios(config)
             .then((response) => response.data.results)
-            .catch(function (error) {
-                console.log(error);
-            });
-        if (result.products.length > 0) {
+            .catch((error) => error.response.data);
+        if (_.isArray(result.products)) {
             result.categories = await fnCategories(result.products[0].category_id);
+        } else {
+            result.products = []
+            result.categories = []
         }
     }
 
-    res.json(result);
+    res.status(200).json(result);
 }
 
 searchCtrl.product = async (req, res, next) => {
@@ -65,14 +66,15 @@ searchCtrl.product = async (req, res, next) => {
 
     item = await axios(config)
         .then((response) => response.data)
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch((error) => error.response.data);
+
+    if (_.isUndefined(item.status)) {
+        return res.status(400).json({});
+    }
+
     description = await axios(configDesc)
         .then((response) => response.data)
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch((error) => error.response.data);
 
     /**
      * 
@@ -88,7 +90,7 @@ searchCtrl.product = async (req, res, next) => {
         result.categories = await fnCategories(item.category_id);
     }
 
-    res.json(result)
+    res.status(200).json(result);
 
 }
 

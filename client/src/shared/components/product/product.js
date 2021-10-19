@@ -1,5 +1,6 @@
 import React from "react";
 import LoaderPAC from "../spinners/loader";
+import NotFound from "../../components/notFound/notFound";
 import  { formatPrice, translate } from "../../../utilities/utility";
 
 import _ from 'lodash';
@@ -7,6 +8,10 @@ import _ from 'lodash';
 function Product(props) {
     if (props.loading) {
         return <LoaderPAC />
+    }
+    
+    if (_.isEmpty(props.product)) {
+        return <NotFound />
     }
     if (!_.isEmpty(props.viewed)) {
         let ls = (localStorage.getItem('viewed') !== null) ? JSON.parse(localStorage.getItem('viewed')) : [] ;

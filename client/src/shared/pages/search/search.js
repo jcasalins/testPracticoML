@@ -21,8 +21,10 @@ class SearchPage extends Component {
         }
     }
     componentDidMount () {
-        const query = parse(this.props.location.search, { ignoreQueryPrefix: true })
-        this.getProducts(query.search);
+        if (!_.isEmpty(this.props.location.search) && _.isEmpty(this.state.products)) {
+            const query = parse(this.props.location.search, { ignoreQueryPrefix: true })
+            this.getProducts(query.search);
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -32,7 +34,7 @@ class SearchPage extends Component {
             && prevProps.location.search !== this.props.location.search) {
             const query = parse(this.props.location.search, { ignoreQueryPrefix: true });
             this.getProducts(query.search);
-            }
+        }
     }
 
     getProducts(search) {        
