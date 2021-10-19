@@ -1,0 +1,93 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/utilities.scss';
+/** Product **/
+
+.product {
+    background: $white-color;
+}
+
+.product-content {
+    padding: toRem(24) toRem(24) toRem(30);
+}
+
+.image-product {
+    text-align: center;
+
+    img {
+        object-fit: contain;
+        //object-position: center;
+        width: 100%;
+
+    }
+
+    @media (min-width: 992px) {
+        img {
+            object-fit: scale-down;
+            width: auto;
+        }
+    }
+}
+
+.content-info-product {
+
+    padding-top: toRem(7);
+
+    .label {
+        @include libRem(font-size, 14);
+        color: $text-color;
+        font-style: normal;
+        font-weight: 400;
+        margin-bottom: toRem(8);
+    }
+
+    .name-product {
+        @include libRem(font-size, 25);
+        color: $text-color;
+        font-style: normal;
+        font-weight: 600;
+        margin-bottom: toRem(18);
+    }
+
+    .price-product {
+        @include libRem(font-size, 46);
+        color: $text-color;
+        font-style: normal;
+        font-weight: 500;
+        margin-bottom: toRem(51);
+
+        sup {
+            @include libRem(font-size, 22);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .name-product {
+            max-width: 248px;
+        }
+    }
+}
+
+
+.desc-product {
+    margin-top: toRem(20);
+
+    h2 {
+        @include libRem(font-size, 28);
+        color: $text-color;
+        font-style: normal;
+        font-weight: 400;
+        margin-bottom: toRem(24);
+    }
+
+    p {
+        @include libRem(font-size, 16);
+        color: #acacac;
+        font-style: normal;
+        font-weight: 300;
+    }
+
+    @media (min-width: 768px) {
+        margin-top: toRem(154);
+    }
+
+}

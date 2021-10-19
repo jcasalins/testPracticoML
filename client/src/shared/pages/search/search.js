@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import Search from "../../components/search/search";
 import ItemsList from "../../components/itemsList/items";
+import Breadcrumbs from "../../components/Breadcrumbs/breadcrumbs";
 
 import _ from "lodash";
-
 import { parse } from "qs";
-import Breadcrumbs from "../../components/Breadcrumbs/breadcrumbs";
+
+import "./search.scss";
 
 class SearchPage extends Component {
     constructor (props) {
         super(props);
 
-        let initProduct = [];
-        let initCategories = [];
         
         this.state = {
-            products : initProduct,
-            categories: initCategories,
-            search: ''
-
+            products : [],
+            categories: [],
+            search: '',
+            loading: false
         }
     }
     componentDidMount () {
@@ -37,13 +36,14 @@ class SearchPage extends Component {
     }
 
     getProducts(search) {        
-        this.setState({ search, products : [], categories: []});
+        this.setState({ search, loading: true});
         this.reqGetProducts(search)
             .then( res => {
                 let { products, categories } = res
                 this.setState({
                     products,
-                    categories 
+                    categories,
+                    loading: false 
                 })
             })
     }
@@ -58,7 +58,7 @@ class SearchPage extends Component {
             <main>
                 <Search history={this.props.history}/>
                 <Breadcrumbs categories={this.state.categories}/>
-                <ItemsList products={this.state.products} />
+                <ItemsList products={this.state.products} loading={this.state.loading}/>
             </main>
         )
     }

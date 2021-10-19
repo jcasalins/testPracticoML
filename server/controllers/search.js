@@ -46,7 +46,6 @@ searchCtrl.search = async (req, res, next) => {
     }
 
     res.json(result);
-    //res.status(200).send('hola');
 }
 
 searchCtrl.product = async (req, res, next) => {
@@ -64,7 +63,6 @@ searchCtrl.product = async (req, res, next) => {
         headers: {}
     };
 
-    console.log(`${URL}items/${id}`);
     item = await axios(config)
         .then((response) => response.data)
         .catch(function (error) {
@@ -85,7 +83,7 @@ searchCtrl.product = async (req, res, next) => {
     result.price = item.price;
     result.condition = item.condition;
     result.description = description.plain_text
-
+    result.sold_quantity = item.sold_quantity;
     if (item.category_id) {
         result.categories = await fnCategories(item.category_id);
     }

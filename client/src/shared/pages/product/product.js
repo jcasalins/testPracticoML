@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import Search from "../../components/search/search";
 import Breadcrumbs from "../../components/Breadcrumbs/breadcrumbs";
+import Product from "../../components/product/product";
 
 import _ from 'lodash';
 
 
+import "./product.scss";
 
 class ProductPage extends Component {
     constructor(props) {
         super(props);
 
-        let initProduct = [];
-
-
         this.state = {
-            product: initProduct,
+            product: {},
             loading: false
         };
     }
@@ -23,18 +22,19 @@ class ProductPage extends Component {
         this.getProduct(id);
     }
     getProduct(id){
+        this.setState({ product: {}, loading: true });
         this.reqGetProduct(id)
             .then(res => {
                 res.description = this.description(res.description);
-                console.log(res.categories);
                 this.setState({
-                    product: res
+                    product: res,
+                    loading: false
                 })
             })
 
     }
-    reqGetProduct(id) {
-        return fetch(`/api/items/${id}`)
+    async reqGetProduct(id) {
+        return await fetch(`/api/items/${id}`)
                 .then(res => res.json())
                 .catch(err => console.log(err));
     }
@@ -51,27 +51,10 @@ class ProductPage extends Component {
             <main>
                 <Search history={this.props.history}/>
                 <Breadcrumbs categories={this.state.product.categories} />
-                <div className="container product">
-                    <div className="row product-content">
-                        <div className="image-product col-12 col-md-8">
-                            <img src={this.state.product.image} alt={this.state.product.title} />
-                        </div>
-                        <div className="info-product col-12 col-md-4">
-                            <div className="content-info-product">
-                                <p className="label">
-                                    <span className="tag">{this.state.product.condition}</span> - <span className="sales">234 Vendidos</span>
-                                </p>
-                                <h1 className="name-product">{this.state.product.title} </h1>
-                                <p className="price-product">$ {this.state.product.price}<sup>00</sup></p>
-                                <button type="button" className="btn btn-primary">Comprar</button>
-                            </div>
-                        </div>
-                        <div className="desc-product col-12">
-                            <h2>Descripción del producto</h2>
-                            <p>{this.state.product.description}</p>
-                        </div>
-                    </div>
-                </div>
+                <Product 
+                    product={this.state.product}
+                    loading={this.state.loading}
+                />
             </main>
         )
     }

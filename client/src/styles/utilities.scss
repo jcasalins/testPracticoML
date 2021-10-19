@@ -1,0 +1,17 @@
+@use 'sass:math';
+
+
+/****/
+
+@mixin libRem($property, $sizeValue: 16,
+  $basePx: 16) {
+  $remValue: math.div($sizeValue, $basePx);
+  $pxValue: ($sizeValue);
+  #{$property}: $pxValue + px;
+  #{$property}: $remValue + rem;
+}
+
+@function toRem($value, $base: 16) {
+  $remValue: math.div($value, $base) + rem;
+  @return $remValue;
+}

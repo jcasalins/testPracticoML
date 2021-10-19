@@ -7,7 +7,11 @@ class HomePage extends Component {
         return (
             <main>
                 <Search history={this.props.history}/>
-                <h1>home</h1>
+                <div className="container">
+                    <div className="row">
+                        
+                    </div>
+                </div>
             </main>
         )
     }

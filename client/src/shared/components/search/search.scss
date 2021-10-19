@@ -1,0 +1,44 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/utilities.scss';
+
+/** Search bar **/
+.header-ML {
+    background-color: #FFE600;
+  
+  }
+  
+  nav {
+    .content {
+  
+      min-height: 56px;
+      align-items: center;
+    }
+  }
+  
+  .logo-content {
+  
+    .logo {
+      a {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  
+  
+  .input-group {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: stretch;
+  
+    .form-control {
+      height: 38px;
+      flex: 1 1 auto;
+      outline: none;
+      border: 0;
+      border-radius: toRem(2) 0 0 toRem(2);
+      padding: toRem(10) toRem(13);
+    }
+  
+  }
