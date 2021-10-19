@@ -45,6 +45,9 @@ class ProductPage extends Component {
         }) 
         return desc;
     }
+    recentlyviewed(product){        
+        return (!_.isEmpty(product)) ? { id: product.id, title: product.title, image: product.image }  : {};
+    }
 
     render() {
         return (
@@ -54,6 +57,7 @@ class ProductPage extends Component {
                 <Product 
                     product={this.state.product}
                     loading={this.state.loading}
+                    viewed={this.recentlyviewed(this.state.product)}
                 />
             </main>
         )

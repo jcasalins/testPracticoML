@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { formatPrice } from "../../../utilities/utility";
+
 
 
 class Item extends Component {
@@ -39,7 +39,7 @@ class Item extends Component {
                 <div className="col-12 col-sm-6 col-md-7 detail-item">
                     <p className="price-item">
                         <Link to={`/items/${this.props.product.id}`}>
-                            $ {formatPrice(this.props.product.price)}
+                            $ {this.props.product.price}
                         </Link>
                     </p>
                     <p className="descrip-item">

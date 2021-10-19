@@ -22,7 +22,7 @@ fnCategories = async (id) => {
 }
 
 searchCtrl.search = async (req, res, next) => {
-    const ENDPOINT = process.env.API_ENDPOINT;
+    const ENDPOINT = process.env.API_LOCATION;
 
     const query = (req.query.s || req.query.search);
     let result = {};

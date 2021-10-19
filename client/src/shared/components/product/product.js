@@ -2,14 +2,22 @@ import React from "react";
 import LoaderPAC from "../spinners/loader";
 import  { formatPrice, translate } from "../../../utilities/utility";
 
-//import _ from 'lodash';
+import _ from 'lodash';
 
 function Product(props) {
     if (props.loading) {
         return <LoaderPAC />
     }
+    if (!_.isEmpty(props.viewed)) {
+        let ls = (localStorage.getItem('viewed') !== null) ? JSON.parse(localStorage.getItem('viewed')) : [] ;
+        if (_.findIndex(ls, ['id', props.viewed.id]) < 0 ) {            
+            ls.push(props.viewed);
+        }
+        localStorage.setItem('viewed', JSON.stringify(ls))
+    }
 
-
+    let price = formatPrice(props.product.price);
+    
     return (
         <div className="container product">
             <div className="row product-content">
@@ -22,7 +30,7 @@ function Product(props) {
                             <span className="tag">{translate(props.product.condition)}</span> <span className="sales">{props.product.sold_quantity !== 0 ? ` - ${props.product.sold_quantity} vendidos` : ''}</span>
                         </p>
                         <h1 className="name-product">{props.product.title} </h1>
-                        <p className="price-product">$ { formatPrice(props.product.price)}<sup>00</sup></p>
+                        <p className="price-product">$ {price[0]}<sup>{(!_.isEmpty(price[1]) ? price[1] : '00')}</sup></p>
                         <button type="button" className="btn btn-primary">Comprar</button>
                     </div>
                 </div>
